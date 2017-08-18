@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "test:watch": "mocha --watch"
   },
   "keywords": [],
   "author": "sdvcrx",
@@ -12,6 +13,7 @@
   "devDependencies": {
     "bluebird": "^3.5.0",
     "chai": "^4.1.1",
+    "chai-as-promised": "^7.1.1",
     "mocha": "^3.5.0",
     "redis": "^2.8.0"
   }
