@@ -1,9 +1,10 @@
 const CacheDriver = require('./cacheDriver')
 
 class CacheItem {
-  constructor(name = '', data = '') {
+  constructor(name = '', data = '', timeout = 0) {
     this.name = name
     this.data = data
+    this.timeout = timeout
 
     const noData = (!name && !data)
     this.createdDate = noData ? 0 : new Date().getTime()
@@ -14,7 +15,13 @@ class CacheItem {
    */
   invalid() {
     const now = new Date().getTime()
-    return now > (this.createdDate + CacheDriver.timeout * 1000)
+    if (this.createdDate === 0) {
+      return true
+    }
+    if (this.timeout > 0) {
+      return now > (this.createdDate + this.timeout * 1000)
+    }
+    return false
   }
 
   toString() {
