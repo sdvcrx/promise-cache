@@ -1,6 +1,8 @@
-# Cache Promise #
+# promise-cache-memorize #
+
+Memoize promise-returning functions.
 
 ## TODO ##
 
-[ ] Provide options for cache type
-[ ] Allow cache function has its own cache timeout
+- [ ] Provide options for cache type
+- [ ] Multiple cache backend support
