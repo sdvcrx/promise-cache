@@ -21,8 +21,8 @@ describe('Cache', () => {
   describe('#remember', () => {
     // TODO test actual cache result
     it('expect remember promise result', () => {
-      const cacheRequest = Cache.rememberForever('key', request())
-      expect(cacheRequest).to.eventually.deep.equal(data)
+      const cacheRequest = Cache.remember('key', request)
+      expect(cacheRequest(10)).to.eventually.deep.equal(data)
     })
   })
 })

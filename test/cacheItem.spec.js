@@ -28,7 +28,7 @@ describe('CacheItem', () => {
       const json = `{"name":"test","data":"data","createdDate":${new Date().getTime()}}`
       const item = CacheItem.from(json)
       expect(item.invalid()).to.be.false
-      expect(item).to.have.all.keys('name', 'data', 'createdDate')
+      expect(item).to.have.all.keys('name', 'data', 'createdDate', 'timeout')
     })
   })
 })
