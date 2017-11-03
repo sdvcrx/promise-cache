@@ -29,7 +29,16 @@ class CacheItem {
   }
 }
 
-CacheItem.fromMethod = JSON.parse
+CacheItem.fromMethod = function (str) {
+  if (!str) {
+    return str
+  }
+  const obj = JSON.parse(str)
+  if (obj.data.type === 'Buffer') {
+    obj.data = Buffer.from(obj.data)
+  }
+  return obj
+}
 CacheItem.toMethod = JSON.stringify
 
 CacheItem.from = function from(str) {

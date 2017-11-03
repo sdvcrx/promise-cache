@@ -21,6 +21,13 @@ describe('CacheItem', () => {
       const jsonStr = item.toString()
       expect(jsonStr).to.include('{"name":"test","data":"data"')
     })
+
+    it('expect serialize Buffer to json string', () => {
+      const data = new Buffer('data')
+      const item = new CacheItem('test', data)
+      const jsonStr = item.toString()
+      expect(jsonStr).to.include('{"name":"test","data":{"type":"Buffer","data":[100,97,116,97]}')
+    })
   })
 
   describe('#deserialize', () => {
@@ -29,6 +36,13 @@ describe('CacheItem', () => {
       const item = CacheItem.from(json)
       expect(item.invalid()).to.be.false
       expect(item).to.have.all.keys('name', 'data', 'createdDate', 'timeout')
+    })
+
+    it('expect deserialize from json string to Buffer', () => {
+      const json = `{"name":"test","data":{"type":"Buffer","data":[100,97,116,97]},"timeout":0,"createdDate":${new Date().getTime()}}`
+      const item = CacheItem.from(json)
+      expect(item.invalid()).to.be.false
+      expect(Buffer.isBuffer(item.data)).to.be.true
     })
   })
 })
