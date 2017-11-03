@@ -7,7 +7,10 @@
     "test": "mocha",
     "test:watch": "mocha --watch"
   },
-  "keywords": [],
+  "keywords": [
+    "cache",
+    "promise"
+  ],
   "author": "sdvcrx",
   "license": "MIT",
   "devDependencies": {
