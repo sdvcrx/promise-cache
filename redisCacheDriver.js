@@ -11,7 +11,7 @@ class RedisCacheDriver extends CacheDriver {
   set(key, data, timeout = CacheDriver.timeout) {
     const item = new CacheItem(key, data, timeout)
 
-    if (timeout === 0) {
+    if (timeout !== 0) {
       return redis.setAsync(key, item.toString(), 'EX', timeout)
         .then(() => item)
     } else {
