@@ -1,7 +1,7 @@
 const CacheDriver = require('./cacheDriver')
 
 class CacheItem {
-  constructor(name = '', data = '', timeout = 0) {
+  constructor(name = '', data, timeout = 0) {
     this.name = name
     this.data = data
     this.timeout = timeout

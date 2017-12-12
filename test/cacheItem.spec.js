@@ -12,6 +12,7 @@ describe('CacheItem', () => {
     it('expect return true if cache is empty', () => {
       const item = new CacheItem()
       expect(item.invalid()).to.be.true
+      expect(item.data).to.be.undefined
     })
   })
 
