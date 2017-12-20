@@ -1,9 +1,9 @@
 # promise-cache-memorize #
 
+Memoize promise-returning functions.
+
 [![Build Status](https://travis-ci.org/sdvcrx/promise-cache.svg?branch=master)](https://travis-ci.org/sdvcrx/promise-cache)
 [![npm package](https://img.shields.io/npm/v/promise-cache-memorize.svg)](https://www.npmjs.com/package/promise-cache-memorize)
-
-Memoize promise-returning functions.
 
 ## Usage ##
 
