@@ -1,7 +1,3 @@
-const CacheDriver = require('./redisCacheDriver')
-
-const Cache = {}
-
 function serializeArguments(obj) {
   return Array
     .from(obj)
@@ -9,25 +5,34 @@ function serializeArguments(obj) {
     .join('-')
 }
 
-Cache.remember = function rememberFunc (key, func, timeout) {
-  return function () {
-    return new Promise((resolve, reject) => {
-      const cacheKey = `${key}-${serializeArguments(arguments)}`
+function factory (type = 'lru', options = {}) {
+  const CacheDriver = require(`./${type}CacheDriver`)
+  const cacheDriver = new CacheDriver
 
-      CacheDriver.get(cacheKey).then((cacheData) => {
-        if (cacheData.invalid()) {
-          func.apply(this, arguments).then((data) => {
-            // cache data
-            CacheDriver.set(cacheKey, data, timeout)
+  const Cache = {}
 
-            resolve(data)
-          }).catch(err => reject(err))
-        } else {
-          resolve(cacheData.data)
-        }
+  Cache.remember = function rememberFunc (key, func, timeout) {
+    return function () {
+      return new Promise((resolve, reject) => {
+        const cacheKey = `${key}-${serializeArguments(arguments)}`
+
+        cacheDriver.get(cacheKey).then((cacheData) => {
+          if (cacheData.invalid()) {
+            func.apply(this, arguments).then((data) => {
+              // cache data
+              cacheDriver.set(cacheKey, data, timeout)
+
+              resolve(data)
+            }).catch(err => reject(err))
+          } else {
+            resolve(cacheData.data)
+          }
+        })
       })
-    })
+    }
   }
-};
 
-module.exports = Cache
+  return Cache
+}
+
+module.exports = factory

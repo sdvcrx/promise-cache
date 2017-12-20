@@ -1,24 +1,30 @@
-const redis = require('./lib/redis')
+const Redis = require('ioredis')
 const CacheDriver = require('./cacheDriver')
 const CacheItem = require('./cacheItem')
 
 class RedisCacheDriver extends CacheDriver {
+  constructor (options) {
+    super()
+
+    this.redis = new Redis(options)
+  }
+
   get(key) {
-    return redis.getAsync(key)
+    return this.redis.get(key)
       .then(data => CacheItem.from(data))
   }
 
-  set(key, data, timeout = CacheDriver.timeout) {
+  set(key, data, timeout = this.timeout) {
     const item = new CacheItem(key, data, timeout)
 
     if (timeout !== 0) {
-      return redis.setAsync(key, item.toString(), 'EX', timeout)
+      return this.redis.set(key, item.toString(), 'EX', timeout)
         .then(() => item)
     } else {
-      return redis.setAsync(key, item.toString())
+      return this.redis.set(key, item.toString())
         .then(() => item)
     }
   }
 }
 
-module.exports = new RedisCacheDriver()
+module.exports = RedisCacheDriver

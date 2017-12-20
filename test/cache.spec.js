@@ -3,7 +3,7 @@ const chaiAsPromised = require("chai-as-promised")
 chai.use(chaiAsPromised)
 const expect = chai.expect
 
-const Cache = require('../')
+const Cache = require('../')('redis')
 
 const data = { data: 'test' }
 

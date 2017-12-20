@@ -2,8 +2,8 @@ const CacheDriver = require('./cacheDriver')
 const CacheItem = require('./cacheItem')
 
 class SimpleCacheDriver extends CacheDriver {
-  constructor() {
-    super()
+  constructor(options) {
+    super(options)
     this._cache = {}
   }
 
@@ -29,4 +29,4 @@ class SimpleCacheDriver extends CacheDriver {
   }
 }
 
-module.exports = new SimpleCacheDriver()
+module.exports = SimpleCacheDriver

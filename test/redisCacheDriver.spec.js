@@ -4,6 +4,7 @@ chai.use(chaiAsPromised)
 const expect = chai.expect
 
 const RedisCacheDriver = require('../redisCacheDriver')
+const redisCacheDriver = new RedisCacheDriver()
 
 const data = { data: 'test' }
 
@@ -14,7 +15,7 @@ function Timeout (secs) {
 }
 
 function testRedisGet (keyName, data, done) {
-  const promise = RedisCacheDriver.get(keyName, data)
+  const promise = redisCacheDriver.get(keyName, data)
     .then(d => d.data)
 
   const chain = expect(promise)
@@ -30,13 +31,13 @@ describe('RedisCacheDriver', () => {
     this.timeout(2000)
 
     it('expect get key from redis', (done) => {
-      RedisCacheDriver.set('key1', data).then(() => {
+      redisCacheDriver.set('key1', data).then(() => {
         testRedisGet('key1', data, done)
       }).catch(done)
     })
 
     it('expect get key from redis with timeout', (done) => {
-      RedisCacheDriver.set('key2', data, 1).then(() => {
+      redisCacheDriver.set('key2', data, 1).then(() => {
 
         testRedisGet('key2', data)
 
