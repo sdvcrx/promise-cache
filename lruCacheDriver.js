@@ -22,4 +22,4 @@ class LRUCacheDriver extends CacheDriver {
   }
 }
 
-module.exports = new LRUCacheDriver()
+module.exports = LRUCacheDriver
