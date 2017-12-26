@@ -1,28 +1,27 @@
 const chai = require('chai')
 const chaiAsPromised = require("chai-as-promised")
 chai.use(chaiAsPromised)
-const expect = chai.expect
+const { expect } = chai
 
 const Cache = require('../')('lru')
-
-const data = { data: 'test' }
-
-// Simulate network request
-function request(sec = 0) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(data)
-    }, sec)
-  })
-}
-
+const request = require('./request')
 
 describe('Cache', () => {
+  const cacheRequest = Cache.remember('key', request)
+
   describe('#remember', () => {
-    // TODO test actual cache result
-    it('expect remember promise result', () => {
-      const cacheRequest = Cache.remember('key', request)
-      expect(cacheRequest(10)).to.eventually.deep.equal(data)
+    beforeEach(() => {
+      return cacheRequest(100)
+    })
+
+    it('expect remember promise result', function () {
+      // set timeout to make sure hit cache
+      this.timeout(10)
+
+      const promise = cacheRequest(100)
+      expect(promise).eventually.deep.equal(request.data)
+
+      return promise
     })
   })
 })
