@@ -3,11 +3,21 @@ const chaiAsPromised = require("chai-as-promised")
 chai.use(chaiAsPromised)
 const expect = chai.expect
 
-const Cache = require('../')('redis')
+const CacheFactory = require('../')
+const Cache = CacheFactory('redis')
 const request = require('./request')
 
 describe('Cache', () => {
   const cacheRequest = Cache.remember('key', request)
+
+  describe('#init', () => {
+    it('expect initial cacheDriver with options', () => {
+      const _cache = CacheFactory('redis', {
+        timeout: 123
+      })
+      expect(_cache.cacheDriver.options.timeout).to.equal(123)
+    })
+  })
 
   describe('#remember', () => {
     beforeEach(() => {

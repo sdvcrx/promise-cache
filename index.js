@@ -7,9 +7,12 @@ function serializeArguments(obj) {
 
 function factory (type = 'lru', options = {}) {
   const CacheDriver = require(`./${type}CacheDriver`)
-  const cacheDriver = new CacheDriver
+  const cacheDriver = new CacheDriver(options)
 
-  const Cache = {}
+  const Cache = {
+    options,
+    cacheDriver
+  }
 
   Cache.remember = function rememberFunc (key, func, timeout) {
     return function () {
