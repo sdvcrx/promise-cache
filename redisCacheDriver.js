@@ -4,7 +4,7 @@ const CacheItem = require('./cacheItem')
 
 class RedisCacheDriver extends CacheDriver {
   constructor (options) {
-    super()
+    super(options)
 
     this.redis = new Redis(options)
   }

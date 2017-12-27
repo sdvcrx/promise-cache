@@ -27,6 +27,16 @@ function testRedisGet (keyName, data, done) {
 }
 
 describe('RedisCacheDriver', () => {
+  describe('#options', function () {
+    it('expect initial cacheDriver with specify options', () => {
+      const driver = new RedisCacheDriver({
+        timeout: 1800
+      })
+
+      expect(driver.options.timeout).to.equal(1800)
+    })
+  })
+
   describe('#get', function () {
     this.timeout(2000)
 
