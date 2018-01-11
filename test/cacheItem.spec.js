@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 
-const CacheItem = require('../cacheItem')
+const CacheItem = require('../lib/cacheItem')
 
 describe('CacheItem', () => {
   describe('#invalid', () => {

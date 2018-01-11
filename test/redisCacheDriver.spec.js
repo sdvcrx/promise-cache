@@ -3,7 +3,7 @@ const chaiAsPromised = require("chai-as-promised")
 chai.use(chaiAsPromised)
 const expect = chai.expect
 
-const RedisCacheDriver = require('../redisCacheDriver')
+const RedisCacheDriver = require('../lib/redisCacheDriver')
 const redisCacheDriver = new RedisCacheDriver()
 
 const data = { data: 'test' }

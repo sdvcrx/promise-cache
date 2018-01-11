@@ -6,7 +6,7 @@ function serializeArguments(obj) {
 }
 
 function factory (type = 'lru', options = {}) {
-  const CacheDriver = require(`./${type}CacheDriver`)
+  const CacheDriver = require(`./lib/${type}CacheDriver`)
   const cacheDriver = new CacheDriver(options)
 
   const Cache = {
