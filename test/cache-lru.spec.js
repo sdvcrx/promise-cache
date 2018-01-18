@@ -3,11 +3,21 @@ const chaiAsPromised = require("chai-as-promised")
 chai.use(chaiAsPromised)
 const { expect } = chai
 
+const CacheFactory = require('../')
 const Cache = require('../')('lru')
 const request = require('./request')
 
 describe('Cache(lru)', () => {
   const cacheRequest = Cache.remember('key', request)
+
+  describe('#init', () => {
+    it('expect initial cacheDriver with options', () => {
+      const _cache = CacheFactory('lru', {
+        maxAge: 123
+      })
+      expect(_cache.cacheDriver.options.maxAge).to.equal(123)
+    })
+  })
 
   describe('#remember', () => {
     beforeEach(() => {
