@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "lint": "eslint index.js lib/*.js test/*.js",
+    "unit": "mocha",
+    "test": "npm run test && npm run lint",
     "test:watch": "mocha --watch"
   },
   "keywords": [
@@ -16,6 +18,12 @@
   "devDependencies": {
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
+    "eslint": "^4.15.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
     "mocha": "^3.5.0"
   },
   "dependencies": {
