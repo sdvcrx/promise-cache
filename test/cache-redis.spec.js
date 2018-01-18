@@ -7,7 +7,7 @@ const CacheFactory = require('../')
 const Cache = CacheFactory('redis')
 const request = require('./request')
 
-describe('Cache', () => {
+describe('Cache(redis)', () => {
   const cacheRequest = Cache.remember('key', request)
 
   describe('#init', () => {

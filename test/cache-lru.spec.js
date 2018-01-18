@@ -6,7 +6,7 @@ const { expect } = chai
 const Cache = require('../')('lru')
 const request = require('./request')
 
-describe('Cache', () => {
+describe('Cache(lru)', () => {
   const cacheRequest = Cache.remember('key', request)
 
   describe('#remember', () => {
