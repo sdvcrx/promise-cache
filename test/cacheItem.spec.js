@@ -24,7 +24,7 @@ describe('CacheItem', () => {
     })
 
     it('expect serialize Buffer to json string', () => {
-      const data = new Buffer('data')
+      const data = Buffer.from('data')
       const item = new CacheItem('test', data)
       const jsonStr = item.toString()
       expect(jsonStr).to.include('{"name":"test","data":{"type":"Buffer","data":[100,97,116,97]}')

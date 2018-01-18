@@ -1,4 +1,4 @@
-function serializeArguments(obj) {
+function serializeArguments (obj) {
   return Array
     .from(obj)
     .map(val => JSON.stringify(val))

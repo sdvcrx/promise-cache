@@ -1,5 +1,5 @@
 const chai = require('chai')
-const chaiAsPromised = require("chai-as-promised")
+const chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 const expect = chai.expect
 
@@ -48,7 +48,6 @@ describe('RedisCacheDriver', () => {
 
     it('expect get key from redis with timeout', (done) => {
       redisCacheDriver.set('key2', data, 1).then(() => {
-
         testRedisGet('key2', data)
 
         return Timeout(1)

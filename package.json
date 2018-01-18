@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint index.js lib/*.js test/*.js",
+    "lint:fix": "eslint --fix index.js lib/*.js test/*.js",
     "unit": "mocha",
-    "test": "npm run test && npm run lint",
+    "test": "npm run unit && npm run lint",
     "test:watch": "mocha --watch"
   },
   "keywords": [
